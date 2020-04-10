@@ -14,7 +14,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1ZeWWTKXO2WSbSfGNxTeF7fPy6Q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,7 +26,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="E:/repository/rcbac" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -62,10 +66,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1585988871931">
+    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1586499990905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1585988871931" />
+    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586499990905" />
     <state x="786" y="297" key="FileChooserDialogImpl" timestamp="1586008166078">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -90,5 +94,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="486" y="114" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586006965306" />
+    <state x="1049" y="273" width="672" height="678" key="search.everywhere.popup" timestamp="1586499506773">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1049" y="273" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586499506773" />
   </component>
 </project>
