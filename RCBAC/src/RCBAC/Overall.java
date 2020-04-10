@@ -83,6 +83,10 @@ public class Overall {
         return RiskB;
     }
 
+    public double HRC(User u,File f){
+
+        return 0;
+    }
 
     public static void main(String[] args){
 
