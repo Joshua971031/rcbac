@@ -110,7 +110,9 @@ public class Overall {
         ArrayList<String> temp2 = new ArrayList<>();
         ArrayList<String> union = new ArrayList<>();//并集
         ArrayList<String> intersection = new ArrayList<>();//交集
-        double RiskHD=0;
+        double RiskHD=0; //历史职责风险值
+        double RiskHC=0; //历史内容风险值
+        double RiskH=0; //历史风险值
         double r=0;//杰卡德系数
         double temp_r=0;
         double pi=0;   //di在窗口中出现几率
@@ -146,11 +148,16 @@ public class Overall {
             w = 1-r; //求得di的权
             int count = Collections.frequency(DO,di); //di在窗口中的出现次数
             pi=count/ DO.size();  //得di出现概率
-            RiskHD+=-w*pi*Math.log(pi);   //累加计算得到历史职责风险值
+            RiskHD+=-w*pi*Math.log(pi);   //计算得到历史职责风险值
         }
         //计算历史内容风险
+        for(History h:u.getHistoryList()){
+            RiskHC+=h.getRiskB()/u.getHistoryList().size(); //计算得到历史行为风险值
+        }
         //计算历史风险
-        return 0;
+        double B=0.5;//设置比重值
+        RiskH=B*RiskHD+(1-B)*RiskHC;
+        return RiskH;
     }
 
     public static void main(String[] args){
