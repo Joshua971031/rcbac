@@ -55,5 +55,11 @@ public class User {
     public void setHistoryList(ArrayList<History> historyList) {
         this.historyList = historyList;
     }
+
+    public void addHistory(File f, double RiskB){
+        History h = new History(f,RiskB);
+        this.historyList.add(h);
+
+    }
     
 }

@@ -1,15 +1,26 @@
 package Entity;
 
+import java.util.ArrayList;
+
 public class History {
-    private int fileid;
+    private File file;
+    private ArrayList<Duty> dutyList = new ArrayList<>();
     private double RiskB;
 
-    public int getFileid() {
-        return fileid;
+    public ArrayList<Duty> getDutyList() {
+        return dutyList;
     }
 
-    public void setFileid(int fileid) {
-        this.fileid = fileid;
+    public void setDutyList(ArrayList<Duty> dutyList) {
+        this.dutyList = dutyList;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     public double getRiskB() {
@@ -20,8 +31,9 @@ public class History {
         this.RiskB = riskB;
     }
 
-    public History(int fileid, double riskB) {
-        this.fileid = fileid;
-        this.RiskB = riskB;
+    public History(File file,  double riskB) {
+        this.file = file;
+        this.dutyList = file.getDutyList();
+        RiskB = riskB;
     }
 }

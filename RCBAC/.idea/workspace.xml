@@ -66,10 +66,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1586499990905">
+    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1586589224690">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586499990905" />
+    <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586589224690" />
     <state x="786" y="297" key="FileChooserDialogImpl" timestamp="1586008166078">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -94,9 +94,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="486" y="114" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586006965306" />
-    <state x="1049" y="273" width="672" height="678" key="search.everywhere.popup" timestamp="1586499506773">
+    <state x="752" y="182" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog" timestamp="1586591996785">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1049" y="273" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586499506773" />
+    <state x="752" y="182" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586591996785" />
+    <state x="925" y="269" width="672" height="678" key="search.everywhere.popup" timestamp="1586592484119">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="925" y="269" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586592484119" />
   </component>
 </project>
