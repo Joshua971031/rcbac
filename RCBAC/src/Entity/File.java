@@ -21,6 +21,9 @@ public class File {
         this.keywordList = keywordList;
     }
 
+    public File() {
+    }
+
     public ArrayList<Duty> getDutyList() {
         return dutyList;
     }

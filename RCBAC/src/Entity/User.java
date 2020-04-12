@@ -9,19 +9,24 @@ public class User {
     private double riskquota;//风险配额
     private ArrayList<History> historyList = new ArrayList<History>();//访问历史对象列表
 
-    public ArrayList<Duty> getDutyList() {
-        return dutyList;
-    }
-
-    public void setDutyList(ArrayList<Duty> dutyList) {
-        this.dutyList = dutyList;
-    }
 
     public User(int id, ArrayList<Duty> dutyList, ArrayList<File> bs, double riskquota) {
         this.id = id;
         this.dutyList = dutyList;
         this.bs = bs;
         this.riskquota = riskquota;
+    }
+
+    public User() {
+    }
+
+
+    public ArrayList<Duty> getDutyList() {
+        return dutyList;
+    }
+
+    public void setDutyList(ArrayList<Duty> dutyList) {
+        this.dutyList = dutyList;
     }
 
     public double getRiskquota() {
