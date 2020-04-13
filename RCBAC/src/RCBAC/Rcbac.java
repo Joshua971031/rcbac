@@ -5,6 +5,7 @@ import Entity.File;
 import Entity.History;
 import Entity.User;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
@@ -59,7 +60,7 @@ public class Rcbac {
         ArrayList<String> intersection = new ArrayList<>();//交集
         double r=0;//杰卡德系数
         double temp_r=0;
-
+        DecimalFormat dF = new DecimalFormat("0.0000"); //设置小数位数
         for(Duty duty_u:u.getDutyList()){ //遍历用户职责
             for(Duty duty_f:f.getDutyList()){  //遍历目标文件职责
                 temp2.addAll(duty_f.getkeywordList());
@@ -77,7 +78,7 @@ public class Rcbac {
                 temp1.clear();temp2.clear();
                 System.out.println(intersection+"2");
                 //求杰卡德系数,并取最大值
-                temp_r = intersection.size()/union.size();
+                temp_r = Double.valueOf(dF.format((float)intersection.size()/union.size()));
                 if(temp_r > r){
                     r = temp_r;
                 }
@@ -105,7 +106,7 @@ public class Rcbac {
             temp1.clear();
             System.out.println(intersection+"4");
             //求杰卡德系数，并取最大值
-            temp_r = intersection.size()/union.size();
+            temp_r = Double.valueOf(dF.format((float)intersection.size()/union.size()));
             if(temp_r > r){
                 r = temp_r;
             }
@@ -132,6 +133,7 @@ public class Rcbac {
         double temp_r=0;
         double pi=0;   //di在窗口中出现几率
         double w=0;  //职责加权熵
+        DecimalFormat dF = new DecimalFormat("0.0000"); //设置小数位数
         ArrayList<Duty> DSW = new ArrayList<>(); //从滑动窗口中获得DSW，即所有出现的职责（去重）
         ArrayList<Duty> DO = new ArrayList<>();  //滑动窗口中出现的职责（带重复）
         for(History h:u.getHistoryList()){
@@ -157,7 +159,7 @@ public class Rcbac {
                 temp1.clear();
                 System.out.println(intersection+"6");
                 //求杰卡德系数,并取最大值
-                temp_r = intersection.size()/union.size();
+                temp_r = Double.valueOf(dF.format((float)intersection.size()/union.size()));
                 if(temp_r > r){
                     r = temp_r;
                 }
@@ -166,8 +168,8 @@ public class Rcbac {
             w = 1-r; //求得di的权
             System.out.println("w="+w);
             int count = Collections.frequency(DO,di); //di在窗口中的出现次数
-            pi=count/ DO.size();  //得di出现概率
-            RiskHD+=-w*pi*Math.log(pi);   //计算得到历史职责风险值
+            pi=Double.valueOf(dF.format((float)count/ DO.size()));  //得di出现概率
+            RiskHD+=Double.valueOf(dF.format((float)-w*pi*Math.log(pi)));   //计算得到历史职责风险值
             System.out.println("RiskHD="+RiskHD);
         }
         //计算历史内容风险
@@ -185,22 +187,26 @@ public class Rcbac {
     public boolean Authorization(double RiskB, double RiskH, User u,double T){  //风险配额和管理，最终的授权
         double riskquota = u.getRiskquota();//获得用户的风险配额
         double A=0.5;  //设置权重系数
-        double Risk = A*RiskB+(1-A)*RiskH;//计算总风险值
-        System.out.println("Risk"+Risk);
+        DecimalFormat dF = new DecimalFormat("0.0000"); //设置小数位数
+        double Risk = Double.valueOf(dF.format((float)A*RiskB+(1-A)*RiskH));//计算总风险值
+        System.out.println("Risk="+Risk);
         if(Risk>T){  //风险值超过阈值
             riskquota-=Risk;
             u.setRiskquota(riskquota);
+            System.out.println("用户剩余风险配额:"+riskquota);
             return false;  //拒绝授权
         }else if(riskquota>=Risk){ //风险值没超过阈值
             riskquota-=Risk;
             u.setRiskquota(riskquota);
+            System.out.println("用户剩余风险配额:"+riskquota);
             return true;  //允许授权
         }else{
+            System.out.println("用户剩余风险配额:"+riskquota+"配额不足");
             return false;
         }
     }
 
-    public void init(User u , File f){
+    public void init(User u , File f1, File f2){
         ArrayList<String> keyword1 = new ArrayList<>(); //“医学”职责关键字
         keyword1.add("医生");
         keyword1.add("手术");
@@ -213,9 +219,14 @@ public class Rcbac {
         keyword3.add("生物");
         keyword3.add("抗体");
         keyword3.add("药物");
+        ArrayList<String> keyword4 = new ArrayList<>();//“电脑”职责关键字
+        keyword4.add("电脑");
+        keyword4.add("数码");
+        keyword4.add("硬件");
         Duty d1 = new Duty("医学",keyword1);
         Duty d2 = new Duty("制药",keyword2);
         Duty d3 = new Duty("疫苗",keyword3);
+        Duty d4 = new Duty("电脑",keyword4);
         ArrayList<Duty> duty_u = new ArrayList<>();
         ArrayList<Duty> duty_f = new ArrayList<>();
         ArrayList<Duty> duty_bs1 = new ArrayList<>();
@@ -227,18 +238,26 @@ public class Rcbac {
         keyword_bs1.add("病毒");
         ArrayList<String> keyword_f = new ArrayList<>();
         keyword_f.add("病毒");
-        File f1 = new File(1,duty_bs1,keyword_bs1); //基础集文件
-        bs.add(f1);
+        keyword_f.add("生化");
+        File fbs = new File(1,duty_bs1,keyword_bs1); //基础集文件
+        bs.add(fbs);
 
         u.setId(1);
         u.setDutyList(duty_u);
         u.setBs(bs);
         u.setRiskquota(5);
 
-        f.setId(2);
-        f.setDutyList(duty_f);
-        f.setKeywordList(keyword_f);
+        f1.setId(2);
+        f1.setDutyList(duty_f);
+        f1.setKeywordList(keyword_f);
 
+        ArrayList<Duty> duty_f2 = new ArrayList<>();
+        duty_f2.add(d4);
+        ArrayList<String> keyword_f2 = new ArrayList<>();
+        keyword_f2.add("科技");
+        f2.setId(3);
+        f2.setDutyList(duty_f2);
+        f2.setKeywordList(keyword_f2);
 
         //System.out.println(f.getDutyList().get(0).getkeywordList());
 
@@ -247,11 +266,11 @@ public class Rcbac {
 
     public static void main(String[] args){
         User u =new User();
-        File f = new File();
-
+        File f1 = new File();
+        File f2 = new File();
         Rcbac rcbac = new Rcbac();
-        rcbac.init(u,f);
-        System.out.println(u.getDutyList().get(0).getName());
-        rcbac.Overall(u,f);
+        rcbac.init(u,f1,f2);
+        rcbac.Overall(u,f1);
+        rcbac.Overall(u,f2);
     }
 }
