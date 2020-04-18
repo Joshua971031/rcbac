@@ -8,7 +8,8 @@ import Entity.User;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.StringTokenizer;
+import java.util.List;
+
 
 public class Rcbac {
 
@@ -16,13 +17,16 @@ public class Rcbac {
         double RiskB;
         double RiskH;
         double Risk;
+        System.out.println("用户"+u.getId()+"请求访问文件"+f.getId()+"。");
+        System.out.println("进行访问行为风险评估：");
         RiskB = BRC(u, f);//计算行为风险
+        System.out.println("进行历史风险评估：");
         RiskH = HRC(u, f, RiskB);//计算历史风险
         if (Authorization(RiskB, RiskH, u, 0.5)){
             //风险配额和管理授权
-            System.out.println("授权成功");
+            System.out.println("授权成功！！！！");
         }else{
-            System.out.println("授权失败");
+            System.out.println("授权失败。");
         }
     }
 
@@ -70,13 +74,13 @@ public class Rcbac {
                 temp1.addAll(temp2);
                 union.addAll(temp1);
                 temp1.clear();
-                System.out.println(union+"1");
+                //System.out.println(union+"1");
                 //求交集
                 temp1.addAll(duty_u.getkeywordList());
                 temp1.retainAll(temp2);
                 intersection.addAll(temp1);
                 temp1.clear();temp2.clear();
-                System.out.println(intersection+"2");
+                //System.out.println(intersection+"2");
                 //求杰卡德系数,并取最大值
                 temp_r = Double.valueOf(dF.format((float)intersection.size()/union.size()));
                 if(temp_r > r){
@@ -98,13 +102,13 @@ public class Rcbac {
             temp1.addAll(temp2);
             union.addAll(temp1);
             temp1.clear();
-            System.out.println(union+"3");
+            //System.out.println(union+"3");
             //求交集
             temp1.addAll(bf.getKeywordList());
             temp1.retainAll(temp2);
             intersection.addAll(temp1);
             temp1.clear();
-            System.out.println(intersection+"4");
+            //System.out.println(intersection+"4");
             //求杰卡德系数，并取最大值
             temp_r = Double.valueOf(dF.format((float)intersection.size()/union.size()));
             if(temp_r > r){
@@ -115,12 +119,32 @@ public class Rcbac {
         RiskBC=1-r;//得内容风险
         System.out.println("RiskBC="+RiskBC);
         RiskB=RiskBD*RiskBC;//得行为风险值
-        System.out.println("RiskB="+RiskB);
+        System.out.println("访问行为风险值RiskB="+RiskB);
         return RiskB;
     }
 
-    public double HRC(User u,File f,double RiskB){  //历史风险值计算
-        u.addHistory(f,RiskB);//将本次访问加入滑动窗口
+    public static <T> List<List<T>> averageAssign(List<T> source,int n){  //等分List，用于设置滑动窗口
+        List<List<T>> result=new ArrayList<List<T>>();
+        int remaider=source.size()%n; //(先计算出余数)
+        int number=source.size()/n; //然后是商
+        int offset=0;//偏移量
+        for(int i=0;i<n;i++){
+            List<T> value=null;
+            if(remaider>0){
+                value=source.subList(i*number+offset, (i+1)*number+offset+1);
+                remaider--;
+                offset++;
+            }else{
+                value=source.subList(i*number+offset, (i+1)*number+offset);
+            }
+            result.add(value);
+        }
+        return result;
+    }
+
+
+
+    public double HRC_T(User u,File f,double RiskB, int t){ //历史风险值计算，分时期
         //计算历史职责风险,用熵权法计算职责风险
         ArrayList<String> temp1 = new ArrayList<>();
         ArrayList<String> temp2 = new ArrayList<>();
@@ -133,13 +157,23 @@ public class Rcbac {
         double temp_r=0;
         double pi=0;   //di在窗口中出现几率
         double w=0;  //职责加权熵
+        List<List<History>> hll = averageAssign(u.getHistoryList(),3);
+        ArrayList<History> hl = new ArrayList<>();
+        if(t==1){
+            hl.addAll(hll.get(0));
+        }else if (t==2){
+            hl.addAll(hll.get(0));
+            hl.addAll(hll.get(1));
+        }else if (t==3){
+            hl=u.getHistoryList();
+        }
         DecimalFormat dF = new DecimalFormat("0.0000"); //设置小数位数
         ArrayList<Duty> DSW = new ArrayList<>(); //从滑动窗口中获得DSW，即所有出现的职责（去重）
         ArrayList<Duty> DO = new ArrayList<>();  //滑动窗口中出现的职责（带重复）
-        for(History h:u.getHistoryList()){
+        for(History h:hl){
             DSW = Union_duty(DSW, h.getDutyList());
         }
-        for(History h:u.getHistoryList()){
+        for(History h:hl){
             DO = Union_duty2(DO, h.getDutyList());
         }
         for(Duty di:DSW){
@@ -151,13 +185,13 @@ public class Rcbac {
                 temp1.addAll(temp2);
                 union.addAll(temp1);
                 temp1.clear();
-                System.out.println(union+"5");
+                //System.out.println(union+"5");
                 //求交集
                 temp1.addAll(dj.getkeywordList());
                 temp1.retainAll(temp2);
                 intersection.addAll(temp1);
                 temp1.clear();
-                System.out.println(intersection+"6");
+                //System.out.println(intersection+"6");
                 //求杰卡德系数,并取最大值
                 temp_r = Double.valueOf(dF.format((float)intersection.size()/union.size()));
                 if(temp_r > r){
@@ -166,15 +200,15 @@ public class Rcbac {
                 union.clear();intersection.clear();
             }
             w = 1-r; //求得di的权
-            System.out.println("w="+w);
+            //System.out.println("w="+w);
             int count = Collections.frequency(DO,di); //di在窗口中的出现次数
             pi=Double.valueOf(dF.format((float)count/ DO.size()));  //得di出现概率
-            RiskHD+=Double.valueOf(dF.format((float)-w*pi*Math.log(pi)));   //计算得到历史职责风险值
-            System.out.println("RiskHD="+RiskHD);
+            RiskHD+=Double.valueOf(dF.format((float)-w*pi*Math.log(pi)));   //累加计算得到历史职责风险值
         }
+        System.out.println("RiskHD="+RiskHD);
         //计算历史内容风险
-        for(History h:u.getHistoryList()){
-            RiskHC+=h.getRiskB()/u.getHistoryList().size(); //计算得到历史行为风险值
+        for(History h:hl){
+            RiskHC+=Double.valueOf(dF.format((float)h.getRiskB()/hl.size())); //计算得到历史行为风险值
         }
         System.out.println("RiskHC="+RiskHC);
         //计算历史风险
@@ -182,6 +216,21 @@ public class Rcbac {
         RiskH=B*RiskHD+(1-B)*RiskHC;
         System.out.println("RiskH="+RiskH);
         return RiskH;
+
+    }
+
+    public double HRC(User u,File f,double RiskB){  //历史风险值计算
+        u.addHistory(f,RiskB);//将本次访问加入滑动窗口
+        //计算历史职责风险,用熵权法计算职责风险
+        DecimalFormat dF = new DecimalFormat("0.0000"); //设置小数位数
+        System.out.println("近期历史风险为：");
+        double RiskH1 = HRC_T(u,f,RiskB,1);
+        System.out.println("中期历史风险为：");
+        double RiskH2 = HRC_T(u,f,RiskB,2);
+        System.out.println("全期历史风险为：");
+        double RiskH3 = HRC_T(u,f,RiskB,3);
+        System.out.println("最终历史风险值RiskH="+Double.valueOf(dF.format((float)(RiskH1+RiskH2+RiskH3)/3)));
+        return Double.valueOf(dF.format((float)(RiskH1+RiskH2+RiskH3)/3));
     }
 
     public boolean Authorization(double RiskB, double RiskH, User u,double T){  //风险配额和管理，最终的授权
