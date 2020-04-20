@@ -255,7 +255,7 @@ public class Rcbac {
         }
     }
 
-    public void init(User u , File f1, File f2){
+   /* public void init(User u , File f1, File f2){
         ArrayList<String> keyword1 = new ArrayList<>(); //“医学”职责关键字
         keyword1.add("医生");
         keyword1.add("手术");
@@ -310,10 +310,10 @@ public class Rcbac {
 
         //System.out.println(f.getDutyList().get(0).getkeywordList());
 
-    }
+    }*/
 
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         User u =new User();
         File f1 = new File();
         File f2 = new File();
@@ -321,5 +321,5 @@ public class Rcbac {
         rcbac.init(u,f1,f2);
         rcbac.Overall(u,f1);
         rcbac.Overall(u,f2);
-    }
+    }*/
 }

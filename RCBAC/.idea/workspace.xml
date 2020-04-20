@@ -41,7 +41,7 @@
       <recent name="E:\repository\rcbac\RCBAC\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Rcbac">
+  <component name="RunManager" selected="JUnit.Test.test_run">
     <configuration name="Overall" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="RCBAC.Overall" />
       <module name="RCBAC" />
@@ -68,8 +68,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test.test_run" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="RCBAC" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.Test" />
+      <option name="METHOD_NAME" value="test_run" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Test.test_run" />
         <item itemvalue="Application.Rcbac" />
         <item itemvalue="Application.Overall" />
       </list>
@@ -89,6 +106,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="542" y="183" key="#Notifications" timestamp="1587354895271">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="542" y="183" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1587354895271" />
     <state x="1004" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1586681548045">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -101,22 +122,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="786" y="297" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587197898429" />
-    <state width="1501" height="280" key="GridCell.Tab.0.bottom" timestamp="1587199556462">
+    <state width="1501" height="280" key="GridCell.Tab.0.bottom" timestamp="1587355758148">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1501" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587199556462" />
-    <state width="1501" height="280" key="GridCell.Tab.0.center" timestamp="1587199556462">
+    <state width="1501" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587355758148" />
+    <state width="1501" height="280" key="GridCell.Tab.0.center" timestamp="1587355758148">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1501" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587199556462" />
-    <state width="1501" height="280" key="GridCell.Tab.0.left" timestamp="1587199556462">
+    <state width="1501" height="280" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587355758148" />
+    <state width="1501" height="280" key="GridCell.Tab.0.left" timestamp="1587355758148">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1501" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587199556462" />
-    <state width="1501" height="280" key="GridCell.Tab.0.right" timestamp="1587199556462">
+    <state width="1501" height="280" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587355758148" />
+    <state width="1501" height="280" key="GridCell.Tab.0.right" timestamp="1587355758148">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1501" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587199556462" />
+    <state width="1501" height="280" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587355758148" />
     <state x="486" y="114" key="SettingsEditor" timestamp="1587198291159">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
