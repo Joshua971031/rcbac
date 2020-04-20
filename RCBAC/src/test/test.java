@@ -1,8 +1,8 @@
 package test;
-import Entity.Duty;
-import Entity.File;
-import Entity.User;
-import RCBAC.Rcbac;
+import entity.Duty;
+import entity.File;
+import entity.User;
+import rcbac.Rcbac;
 
 import java.util.ArrayList;
 

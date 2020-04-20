@@ -1,9 +1,9 @@
-package RCBAC;
+package rcbac;
 
-import Entity.Duty;
-import Entity.File;
-import Entity.History;
-import Entity.User;
+import entity.Duty;
+import entity.File;
+import entity.History;
+import entity.User;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -41,10 +41,6 @@ public class Rcbac {
         return a1;
     }
 
-    public ArrayList<Duty> Intersection_duty(ArrayList<Duty> a1,ArrayList<Duty> a2){ //求交集
-        a1.retainAll(a2);
-        return a1;
-    }
 
     public double BRC(User u, File f){  //行为风险计算
         double RiskB=0;
